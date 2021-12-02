@@ -1,4 +1,4 @@
-export default function PokemonCard({pokemon}) {
+export default function PokemonCard({ pokemon }) {
   return (
     <div>
       <img src={pokemon.image} />

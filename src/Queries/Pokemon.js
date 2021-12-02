@@ -10,7 +10,6 @@ export default class Pokemon {
         status
         message
         results {
-          url
           name
           image
         }
@@ -18,8 +17,5 @@ export default class Pokemon {
     }
   `;
 
-  static gqlVariables = {
-    limit: 100,
-    offset: 0,
-  };
+  
 }

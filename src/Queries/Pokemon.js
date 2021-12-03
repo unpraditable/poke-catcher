@@ -10,6 +10,7 @@ export default class Pokemon {
         status
         message
         results {
+          id
           name
           image
         }
@@ -17,5 +18,28 @@ export default class Pokemon {
     }
   `;
 
-  
+  static GET_POKEMON_DETAIL = gql`
+    query pokemon($name: String!) {
+      pokemon(name: $name) {
+        id
+        name
+        message
+        abilities {
+          ability {
+            name
+          }
+        }
+        moves {
+          move {
+            name
+          }
+        }
+        types {
+          type {
+            name
+          }
+        }
+      }
+    }
+  `;
 }

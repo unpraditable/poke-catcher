@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Pokemon from "../Queries/Pokemon";
+import { cx, css } from "@emotion/css";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
@@ -10,6 +11,15 @@ export default function PokemonDetailPage() {
   const gqrVar = {
     name,
   };
+
+  const ulClass = css`
+    list-style: none;
+    padding-left: 0;
+  `;
+
+  const capitalize = css`
+    text-transform: capitalize;
+  `;
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMON_DETAIL, {
     variables: gqrVar,
   });
@@ -24,22 +34,22 @@ export default function PokemonDetailPage() {
       {loading && <p>Loading...</p>}
       {pokemon && (
         <>
-          <h1>{pokemon.name}</h1>
+          <h1 className={capitalize}>{pokemon.name.replace(/-/g, " ")}</h1>
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
           />
+          <h2>Types:</h2>
+          <ul className={ulClass}>
+            {pokemon.types.map(({ type }) => (
+              <li className={capitalize}>{type.name}</li>
+            ))}
+          </ul>
           <h2>Moves:</h2>
-          <ol>
+          <ul className={ulClass}>
             {pokemon.moves.map(({ move }) => (
-              <li>{move.name}</li>
+              <li className={capitalize}>{move.name.replace(/-/g, " ")}</li>
             ))}
-          </ol>
-          <h2>Abilities:</h2>
-          <ol>
-            {pokemon.abilities.map(({ ability }) => (
-              <li>{ability.name}</li>
-            ))}
-          </ol>
+          </ul>
         </>
       )}
     </div>

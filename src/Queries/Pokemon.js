@@ -24,11 +24,6 @@ export default class Pokemon {
         id
         name
         message
-        abilities {
-          ability {
-            name
-          }
-        }
         moves {
           move {
             name

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import PokemonCard from "../Components/PokemonCard";
 import Pokemon from "../Queries/Pokemon";
 import "./PokemonList.css";
+import { cx, css } from "@emotion/css";
 
 export default function PokemonListPage() {
   const [pokemons, setPokemons] = useState([]);
@@ -12,6 +13,10 @@ export default function PokemonListPage() {
   });
   const pokemonsCount = useRef(0);
 
+  const ulClass = css`
+    list-style: none;
+    padding-left: 0;
+  `;
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
   });
@@ -48,16 +53,9 @@ export default function PokemonListPage() {
   }, [loading]);
 
   return (
-    <ul>
+    <ul className={ulClass}>
       {pokemons.length > 0 &&
-        pokemons.map((pokemon, i) => (
-          <li key={i}>
-            <a href={pokemon.name}>
-              <p>{i}</p>
-              <PokemonCard pokemon={pokemon} />
-            </a>
-          </li>
-        ))}
+        pokemons.map((pokemon, i) => <PokemonCard key={i} pokemon={pokemon} />)}
       {loading && <p>Loading...</p>}
     </ul>
   );

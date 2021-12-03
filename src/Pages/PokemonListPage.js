@@ -10,6 +10,7 @@ export default function PokemonListPage() {
     limit: 100,
     offset: 0,
   });
+  const pokemonsCount = useRef(0);
 
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
@@ -25,7 +26,7 @@ export default function PokemonListPage() {
   };
 
   function getNewPokemons() {
-    if (gqrVar.offset <= data.pokemons.count) {
+    if (gqrVar.offset < pokemonsCount.current) {
       setGqrVar({
         limit: 100,
         offset: gqrVar.offset + 100,
@@ -40,6 +41,9 @@ export default function PokemonListPage() {
     console.log("Response from server", data);
     if (data && !loading) {
       setPokemons((arr) => [...arr, ...data.pokemons.results]);
+      if (pokemonsCount.current === 0) {
+        pokemonsCount.current = data.pokemons.count;
+      }
     }
   }, [loading]);
 
@@ -48,7 +52,10 @@ export default function PokemonListPage() {
       {pokemons.length > 0 &&
         pokemons.map((pokemon, i) => (
           <li key={i}>
-            <PokemonCard pokemon={pokemon} />
+            <a href={pokemon.name}>
+              <p>{i}</p>
+              <PokemonCard pokemon={pokemon} />
+            </a>
           </li>
         ))}
       {loading && <p>Loading...</p>}

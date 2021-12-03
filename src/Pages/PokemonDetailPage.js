@@ -1,11 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import Pokemon from "../Queries/Pokemon";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
+  const { name } = useParams();
+
   const gqrVar = {
-    name: "sobble",
+    name,
   };
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMON_DETAIL, {
     variables: gqrVar,
@@ -22,6 +25,9 @@ export default function PokemonDetailPage() {
       {pokemon && (
         <>
           <h1>{pokemon.name}</h1>
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+          />
           <h2>Moves:</h2>
           <ol>
             {pokemon.moves.map(({ move }) => (

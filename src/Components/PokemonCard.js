@@ -1,7 +1,7 @@
 import { cx, css } from "@emotion/css";
 import StringUtils from "../Utils/StringUtils";
 
-export default function PokemonCard({ pokemon }) {
+export default function PokemonCard({ pokemon, nickName }) {
   const listClass = css`
     width: 20%;
     display: inline-block;
@@ -27,7 +27,11 @@ export default function PokemonCard({ pokemon }) {
     <li className={listClass}>
       <a href={pokemon.name} className={cx(anchorClass, capitalize)}>
         <img src={pokemon.image} />
-        <p>{StringUtils.removeDash(pokemon.name)}</p>
+        {nickName ? (
+          <p>{nickName}</p>
+        ) : (
+          <p>{StringUtils.removeDash(pokemon.name)}</p>
+        )}
       </a>
     </li>
   );

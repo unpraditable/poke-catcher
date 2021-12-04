@@ -3,7 +3,12 @@ import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 import useStore from "../StateManager/UseStore";
 import StringUtils from "../Utils/StringUtils";
 
-export default function PokemonCard({ pokemon, nickName, release }) {
+export default function PokemonCard({
+  pokemon,
+  nickName,
+  release,
+  totalOwned,
+}) {
   const listClass = css`
     width: 20%;
     display: inline-block;
@@ -45,9 +50,7 @@ export default function PokemonCard({ pokemon, nickName, release }) {
           <>
             <p>{StringUtils.removeDash(pokemon.name)}</p>
             <a href={pokemon.name}>Detail</a>
-            {/* <p>
-              totalCaught: {countCaughtPokemon(myPokemonList, pokemon.name)}
-            </p> */}
+            <p>totalOwned: {totalOwned}</p>
           </>
         )}
       </div>

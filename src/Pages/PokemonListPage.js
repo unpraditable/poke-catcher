@@ -14,17 +14,12 @@ export default function PokemonListPage() {
     limit: 40,
     offset: 0,
   });
+
+  const ownedList = useRef([]);
   const pokemonsCount = useRef(0);
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
   });
-
-  // const speciesList = [
-  //   {
-  //     pokemonName: myPokemonList[0].name,
-  //   },
-  // ];
-  // console.log(speciesList);
 
   window.onscroll = () => {
     if (
@@ -43,6 +38,25 @@ export default function PokemonListPage() {
       });
     }
   }
+
+  function getTotalOwned(arr, name) {
+    return arr[0][name] ? arr[0][name].length : 0;
+  }
+
+  function groupBy(arr, criteria) {
+    const newObj = arr.reduce(function (acc, currentValue) {
+      if (!acc[currentValue[criteria]]) {
+        acc[currentValue[criteria]] = [];
+      }
+      acc[currentValue[criteria]].push(currentValue);
+      return acc;
+    }, {});
+    return newObj;
+  }
+
+  useEffect(() => {
+    ownedList.current.push(groupBy(myPokemonList, "name"));
+  }, []);
 
   useEffect(() => {
     if (loading) console.log("loading");
@@ -65,6 +79,7 @@ export default function PokemonListPage() {
             key={i}
             pokemon={pokemon}
             myPokemonList={myPokemonList}
+            totalOwned={getTotalOwned(ownedList.current, pokemon.name)}
           />
         ))}
       {loading && <p>Loading...</p>}

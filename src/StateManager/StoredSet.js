@@ -1,5 +1,5 @@
 import myPokemonReducer from "./MyPokemon/MyPokemonReducer";
-import ownedSpeciesReducer from "./OwnedSpecies/OwnedSpeciesReducer";
+import ownedSpeciesReducer from "./PokemonList/PokemonList";
 
 const storedSet = (set, get) => {
   return {

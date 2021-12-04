@@ -7,7 +7,6 @@ import MoveList from "../Components/MoveList";
 import GeneralStyle from "../StyleClasses/GeneralStyle";
 import TypeList from "../Components/TypeList";
 import useStore from "../StateManager/UseStore";
-import { ownedSpeciesSelector } from "../StateManager/OwnedSpecies/OwnedSpeciesReducer";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 
 export default function PokemonDetailPage() {
@@ -17,8 +16,6 @@ export default function PokemonDetailPage() {
   const gqrVar = {
     name,
   };
-
-  const saveOwnedSpecies = useStore(ownedSpeciesSelector.saveOwnedSpecies);
 
   const saveMyPokemon = useStore(myPokemonSelector.saveMyPokemon);
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMON_DETAIL, {

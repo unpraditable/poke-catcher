@@ -4,17 +4,27 @@ import PokemonCard from "../Components/PokemonCard";
 import Pokemon from "../Queries/Pokemon";
 import "./PokemonList.css";
 import PokemonDetailStyle from "../StyleClasses/PokemonDetailStyle";
+import useStore from "../StateManager/UseStore";
+import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 
 export default function PokemonListPage() {
+  const myPokemonList = useStore(myPokemonSelector.getMyPokemon);
   const [pokemons, setPokemons] = useState([]);
   const [gqrVar, setGqrVar] = useState({
-    limit: 100,
+    limit: 40,
     offset: 0,
   });
   const pokemonsCount = useRef(0);
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
   });
+
+  // const speciesList = [
+  //   {
+  //     pokemonName: myPokemonList[0].name,
+  //   },
+  // ];
+  // console.log(speciesList);
 
   window.onscroll = () => {
     if (
@@ -28,8 +38,8 @@ export default function PokemonListPage() {
   function getNewPokemons() {
     if (gqrVar.offset < pokemonsCount.current) {
       setGqrVar({
-        limit: 100,
-        offset: gqrVar.offset + 100,
+        limit: 40,
+        offset: gqrVar.offset + 40,
       });
     }
   }
@@ -50,7 +60,13 @@ export default function PokemonListPage() {
   return (
     <ul className={PokemonDetailStyle.ulClass}>
       {pokemons.length > 0 &&
-        pokemons.map((pokemon, i) => <PokemonCard key={i} pokemon={pokemon} />)}
+        pokemons.map((pokemon, i) => (
+          <PokemonCard
+            key={i}
+            pokemon={pokemon}
+            myPokemonList={myPokemonList}
+          />
+        ))}
       {loading && <p>Loading...</p>}
     </ul>
   );

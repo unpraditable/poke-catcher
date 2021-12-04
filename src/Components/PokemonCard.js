@@ -1,7 +1,9 @@
 import { cx, css } from "@emotion/css";
+import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
+import useStore from "../StateManager/UseStore";
 import StringUtils from "../Utils/StringUtils";
 
-export default function PokemonCard({ pokemon, nickName }) {
+export default function PokemonCard({ pokemon, nickName, release }) {
   const listClass = css`
     width: 20%;
     display: inline-block;
@@ -23,16 +25,32 @@ export default function PokemonCard({ pokemon, nickName }) {
   const capitalize = css`
     text-transform: capitalize;
   `;
+
+  // const myPokemonList = useStore(myPokemonSelector.getMyPokemon);
+
+  function countCaughtPokemon(arr, name) {
+    return arr.reduce((total, x) => (x.name === name ? total + 1 : total), 0);
+  }
+  // console.log(myPokemonList);
   return (
     <li className={listClass}>
-      <a href={pokemon.name} className={cx(anchorClass, capitalize)}>
+      <div className={cx(anchorClass, capitalize)}>
         <img src={pokemon.image} />
         {nickName ? (
-          <p>{nickName}</p>
+          <>
+            <p>{nickName}</p>
+            <button onClick={release}>Release</button>
+          </>
         ) : (
-          <p>{StringUtils.removeDash(pokemon.name)}</p>
+          <>
+            <p>{StringUtils.removeDash(pokemon.name)}</p>
+            <a href={pokemon.name}>Detail</a>
+            {/* <p>
+              totalCaught: {countCaughtPokemon(myPokemonList, pokemon.name)}
+            </p> */}
+          </>
         )}
-      </a>
+      </div>
     </li>
   );
 }

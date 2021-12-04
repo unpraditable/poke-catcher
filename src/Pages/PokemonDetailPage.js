@@ -8,7 +8,7 @@ import GeneralStyle from "../StyleClasses/GeneralStyle";
 import TypeList from "../Components/TypeList";
 import useStore from "../StateManager/UseStore";
 import { ownedSpeciesSelector } from "../StateManager/OwnedSpecies/OwnedSpeciesReducer";
-import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemon";
+import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();

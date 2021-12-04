@@ -2,8 +2,10 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Pokemon from "../Queries/Pokemon";
-import { cx, css } from "@emotion/css";
 import StringUtils from "../Utils/StringUtils";
+import MoveList from "../Components/MoveList";
+import GeneralStyle from "../StyleClasses/GeneralStyle";
+import TypeList from "../Components/TypeList";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
@@ -13,14 +15,6 @@ export default function PokemonDetailPage() {
     name,
   };
 
-  const ulClass = css`
-    list-style: none;
-    padding-left: 0;
-  `;
-
-  const capitalize = css`
-    text-transform: capitalize;
-  `;
   const { loading, error, data } = useQuery(Pokemon.GET_POKEMON_DETAIL, {
     variables: gqrVar,
   });
@@ -35,24 +29,14 @@ export default function PokemonDetailPage() {
       {loading && <p>Loading...</p>}
       {pokemon && (
         <>
-          <h1 className={capitalize}>{StringUtils.removeDash(pokemon.name)}</h1>
+          <h1 className={GeneralStyle.capitalize}>
+            {StringUtils.removeDash(pokemon.name)}
+          </h1>
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
           />
-          <h2>Types:</h2>
-          <ul className={ulClass}>
-            {pokemon.types.map(({ type }) => (
-              <li className={capitalize}>{type.name}</li>
-            ))}
-          </ul>
-          <h2>Moves:</h2>
-          <ul className={ulClass}>
-            {pokemon.moves.map(({ move }) => (
-              <li className={capitalize}>
-                {StringUtils.removeDash(move.name)}
-              </li>
-            ))}
-          </ul>
+          <TypeList pokemon={pokemon} />
+          <MoveList pokemon={pokemon} />
         </>
       )}
     </div>

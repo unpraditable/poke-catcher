@@ -1,6 +1,6 @@
 import { css, cx } from "@emotion/css";
 
-export default function Modal({ message, show, handleSubmit, handleClose }) {
+export default function Modal({ show, options, handleSubmit, handleClose }) {
   const modal = css`
     position: fixed;
     top: 0;
@@ -18,6 +18,7 @@ export default function Modal({ message, show, handleSubmit, handleClose }) {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
   `;
 
   const modalShow = css`
@@ -35,13 +36,13 @@ export default function Modal({ message, show, handleSubmit, handleClose }) {
   return (
     <div className={show ? cx(modal, modalShow) : cx(modal, modalHide)}>
       <section className={modalMain}>
-        <p className={paragraph}>{message}</p>
+        <p className={paragraph}>{options.message}</p>
         <button type="button" onClick={handleClose}>
-          Close
+          {options.cancelButton}
         </button>
         {handleSubmit && (
           <button type="button" onClick={handleSubmit}>
-            Confirm
+            {options.submitButton}
           </button>
         )}
       </section>

@@ -12,11 +12,9 @@ import Modal from "../Components/Modals/Modal";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
-  const [modalShown, setModalShown] = useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
   const { name } = useParams();
   const chance = Math.random() >= 0.5;
-  const successMessage = "Pokemon caught! Give it a nickname";
-  const failedMessage = "Failed to caught Pokemon...";
 
   const gqrVar = {
     name,
@@ -28,7 +26,7 @@ export default function PokemonDetailPage() {
   });
 
   function catchPokemon() {
-    setModalShown(true);
+    setIsModalShown(true);
   }
 
   function savePokemon(pokemon) {
@@ -38,8 +36,19 @@ export default function PokemonDetailPage() {
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
       nickName: "tatang",
     });
-    setModalShown(false);
+    setIsModalShown(false);
   }
+
+  const nickNameModalOptions = {
+    message: "Gotcha! Pokemon caught! Please give it a nickname",
+    cancelButton: "Cancel",
+    submitButton: "Confirm",
+  };
+
+  const failedModalOptions = {
+    message: "Failed to catch Pokemon...",
+    cancelButton: "Close",
+  };
 
   useEffect(() => {
     if (data && !loading) {
@@ -65,16 +74,16 @@ export default function PokemonDetailPage() {
 
           {chance ? (
             <Modal
-              show={modalShown}
-              message={successMessage}
-              handleClose={() => setModalShown(false)}
+              show={isModalShown}
+              options={nickNameModalOptions}
+              handleClose={() => setIsModalShown(false)}
               handleSubmit={() => savePokemon(pokemon)}
             />
           ) : (
             <Modal
-              show={modalShown}
-              message={failedMessage}
-              handleClose={() => setModalShown(false)}
+              show={isModalShown}
+              options={failedModalOptions}
+              handleClose={() => setIsModalShown(false)}
             />
           )}
         </>

@@ -1,6 +1,4 @@
 import { cx, css } from "@emotion/css";
-import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
-import useStore from "../StateManager/UseStore";
 import StringUtils from "../Utils/StringUtils";
 
 export default function PokemonCard({
@@ -13,11 +11,11 @@ export default function PokemonCard({
     width: 20%;
     display: inline-block;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 25%;
     }
 
-    @media screen and (max-width: 480px) {
+    @media only screen and (max-width: 480px) {
       width: 50%;
     }
   `;
@@ -31,16 +29,10 @@ export default function PokemonCard({
     text-transform: capitalize;
   `;
 
-  // const myPokemonList = useStore(myPokemonSelector.getMyPokemon);
-
-  function countCaughtPokemon(arr, name) {
-    return arr.reduce((total, x) => (x.name === name ? total + 1 : total), 0);
-  }
-  // console.log(myPokemonList);
   return (
     <li className={listClass}>
       <div className={cx(anchorClass, capitalize)}>
-        <img src={pokemon.image} />
+        <img src={pokemon.image} alt={pokemon.name} />
         {nickName ? (
           <>
             <p>{nickName}</p>

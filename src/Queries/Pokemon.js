@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export default class Pokemon {
   static GET_POKEMONS = gql`

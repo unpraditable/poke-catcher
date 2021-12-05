@@ -1,4 +1,4 @@
-import { cx, css } from "@emotion/css";
+import { css } from "@emotion/css";
 
 export default class PokemonDetailStyle {
   static ulClass = css`

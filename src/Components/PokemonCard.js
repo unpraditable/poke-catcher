@@ -65,7 +65,7 @@ export default function PokemonCard({
     font-size: 14px;
     display: block;
     margin: 0 auto;
-    width: calc(100% - 64px);
+    width: calc(100% - 48px);
     color: white;
     padding: 6px 16px;
     border-radius: 4px;

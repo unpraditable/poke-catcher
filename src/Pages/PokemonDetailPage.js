@@ -62,31 +62,33 @@ export default function PokemonDetailPage() {
       {pokemon && (
         <>
           <button onClick={catchPokemon}>Catch Pokemon</button>
+
           <h1 className={GeneralStyle.capitalize}>
             {StringUtils.removeDash(pokemon.name)}
           </h1>
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-            alt={pokemon.name}
-          />
-          <TypeList pokemon={pokemon} />
-          <MoveList pokemon={pokemon} />
-
-          {chance ? (
-            <Modal
-              show={isModalShown}
-              options={nickNameModalOptions}
-              handleClose={() => setIsModalShown(false)}
-              handleSubmit={() => savePokemon(pokemon)}
+          <div>
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+              alt={pokemon.name}
             />
-          ) : (
-            <Modal
-              show={isModalShown}
-              options={failedModalOptions}
-              handleClose={() => setIsModalShown(false)}
-            />
-          )}
+            <TypeList pokemon={pokemon} />
+            <MoveList pokemon={pokemon} />
+          </div>
         </>
+      )}
+      {chance ? (
+        <Modal
+          show={isModalShown}
+          options={nickNameModalOptions}
+          handleClose={() => setIsModalShown(false)}
+          handleSubmit={() => savePokemon(pokemon)}
+        />
+      ) : (
+        <Modal
+          show={isModalShown}
+          options={failedModalOptions}
+          handleClose={() => setIsModalShown(false)}
+        />
       )}
     </div>
   );

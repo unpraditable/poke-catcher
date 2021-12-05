@@ -49,6 +49,7 @@ export default function MyPokemonListPage() {
           show={isModalShown}
           handleClose={() => setIsModalShown(false)}
           handleSubmit={() => releasePokemon(indexChosen.current)}
+          danger={true}
         />
       )}
     </>

@@ -9,6 +9,7 @@ import TypeList from "../Components/TypeList";
 import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 import Modal from "../Components/Modals/Modal";
+import { css } from "@emotion/css";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
@@ -50,6 +51,34 @@ export default function PokemonDetailPage() {
     cancelButton: "Close",
   };
 
+  const pokemonDetailContainer = css`
+    display: flex;
+    align-items: center;
+    border: 1px solid #49896f;
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 8px;
+  `;
+
+  const pokemonListContainer = css`
+    border-left: 1px solid #49896f;
+  `;
+
+  const buttonCatch = css`
+    font-size: 14px;
+    display: block;
+    width: 180px;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    margin: 24px auto;
+    background-color: #49896f;
+  `;
+
   useEffect(() => {
     if (data && !loading) {
       setPokemon(data.pokemon);
@@ -61,19 +90,25 @@ export default function PokemonDetailPage() {
       {loading && <p>Loading...</p>}
       {pokemon && (
         <>
-          <button onClick={catchPokemon}>Catch Pokemon</button>
-
           <h1 className={GeneralStyle.capitalize}>
             {StringUtils.removeDash(pokemon.name)}
           </h1>
-          <div>
-            <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-              alt={pokemon.name}
-            />
-            <TypeList pokemon={pokemon} />
-            <MoveList pokemon={pokemon} />
+          <div className={pokemonDetailContainer}>
+            <div>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                alt={pokemon.name}
+              />
+            </div>
+            <div className={pokemonListContainer}>
+              <TypeList pokemon={pokemon} />
+              <MoveList pokemon={pokemon} />
+            </div>
           </div>
+
+          <button className={buttonCatch} onClick={catchPokemon}>
+            Catch Pokemon
+          </button>
         </>
       )}
       {chance ? (

@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <h1>Hello, React Router!</h1>
           <Routes>
             <Route path="/" element={<PokemonListPage />} />
             <Route path="/MyPokemonList" element={<MyPokemonListPage />} />

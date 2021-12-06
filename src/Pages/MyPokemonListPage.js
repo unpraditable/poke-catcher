@@ -48,7 +48,9 @@ export default function MyPokemonListPage() {
         message="Pokemon has been released..."
       />
       <h1>My Pokemon Collection</h1>
-
+      <div>
+        <a href="/">All Pokemon List</a> | <span>My Pokemon List</span>
+      </div>
       <ul className={PokemonDetailStyle.ulClass}>
         {myPokemons.length > 0 &&
           myPokemons.map((pokemon, i) => (

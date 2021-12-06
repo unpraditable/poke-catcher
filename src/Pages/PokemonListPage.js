@@ -60,6 +60,10 @@ export default function PokemonListPage() {
   return (
     <>
       <h1>Welcome To Venupedia!</h1>
+      <div>
+        <span>All Pokemon List</span> |{" "}
+        <a href="/MyPokemonList">My Pokemon List</a>
+      </div>
       <ul className={PokemonDetailStyle.ulClass}>
         {pokemons.length > 0 &&
           pokemons.map((pokemon, i) => (

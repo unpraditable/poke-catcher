@@ -10,7 +10,7 @@ import Toast from "../Components/Toasts/Toast";
 
 export default function MyPokemonListPage() {
   const myPokemons = useStore(myPokemonSelector.getMyPokemon);
-  const indexChosen = useRef();
+  const [indexChosen, setIndexChosen] = useState();
   const releaseMyPokemon = useStore(myPokemonSelector.releaseMyPokemon);
   const [isModalShown, setIsModalShown] = useState(false);
   const [isToastShown, setIsToastShown] = useState(false);
@@ -31,7 +31,7 @@ export default function MyPokemonListPage() {
   function openModal(index, nickname, name) {
     message.current = `Are you sure you want to release ${nickname} (${name}) ?`;
     setIsModalShown(true);
-    indexChosen.current = index;
+    setIndexChosen(index);
   }
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function MyPokemonListPage() {
           options={modalOptions}
           show={isModalShown}
           handleClose={() => setIsModalShown(false)}
-          handleSubmit={() => releasePokemon(indexChosen.current)}
+          handleSubmit={() => releasePokemon(indexChosen)}
           danger={true}
         />
       )}

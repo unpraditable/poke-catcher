@@ -76,7 +76,7 @@ export default function PokemonCard({
 
   return (
     <li className={listClass}>
-      <div className={cx(anchorClass, capitalize)}>
+      <div className={anchorClass}>
         <header className={cardHeader}></header>
         <div className={cardImgContainer}>
           <img src={pokemon.image} alt={pokemon.name} />
@@ -91,7 +91,9 @@ export default function PokemonCard({
             </>
           ) : (
             <>
-              <p>{StringUtils.removeDash(pokemon.name)}</p>
+              <p className={capitalize}>
+                {StringUtils.removeDash(pokemon.name)}
+              </p>
               <p>Owned: {totalOwned}</p>
               <a href={pokemon.name} className={cx(detailButton, button)}>
                 Detail

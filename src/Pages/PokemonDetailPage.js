@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import Pokemon from "../Queries/Pokemon";
 import StringUtils from "../Utils/StringUtils";
@@ -15,6 +15,7 @@ export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
   const [isModalShown, setIsModalShown] = useState(false);
   const { name } = useParams();
+  const inputModalRef = useRef();
   const chance = Math.random() >= 0.5;
 
   const gqrVar = {
@@ -31,11 +32,12 @@ export default function PokemonDetailPage() {
   }
 
   function savePokemon(pokemon) {
+    const inputNickname = inputModalRef.current["nickName"].value;
     saveMyPokemon({
       id: pokemon.id,
       name: pokemon.name,
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
-      nickName: "tatang",
+      nickName: inputNickname,
     });
     setIsModalShown(false);
   }
@@ -61,6 +63,7 @@ export default function PokemonDetailPage() {
   `;
 
   const pokemonListContainer = css`
+    width: 100%;
     border-left: 1px solid #49896f;
   `;
 
@@ -113,7 +116,9 @@ export default function PokemonDetailPage() {
       )}
       {chance ? (
         <Modal
+          inputRef={inputModalRef}
           show={isModalShown}
+          withInput={true}
           options={nickNameModalOptions}
           handleClose={() => setIsModalShown(false)}
           handleSubmit={() => savePokemon(pokemon)}

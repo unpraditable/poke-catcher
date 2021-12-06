@@ -8,3 +8,8 @@ body {
   color: #212529;
   background-color: white;
 }
+
+button,
+a {
+  cursor: pointer;
+}

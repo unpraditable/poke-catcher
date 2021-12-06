@@ -4,8 +4,10 @@ export default function Modal({
   show,
   options,
   handleSubmit,
+  withInput,
   handleClose,
   danger,
+  inputRef,
 }) {
   const modal = css`
     position: fixed;
@@ -46,9 +48,9 @@ export default function Modal({
     font-size: 14px;
     display: block;
     margin: 0 auto;
-    width: 84px;
+    width: 100px;
     color: white;
-    padding: 6px 16px;
+    padding: 12px 16px;
     border-radius: 4px;
     text-decoration: none;
     border: none;
@@ -70,10 +72,30 @@ export default function Modal({
     background-color: #49896f;
   `;
 
+  const formStyle = css`
+    margin-bottom: 24px;
+    input {
+      width: 200px;
+      border-radius: 4px;
+      border: 1px solid #212529;
+      padding: 8px 6px;
+    }
+  `;
+
   return (
     <div className={show ? cx(modal, modalShow) : cx(modal, modalHide)}>
       <section className={modalMain}>
         <p className={paragraph}>{options.message}</p>
+        {withInput && (
+          <form className={formStyle} ref={inputRef}>
+            <input
+              label={"Nickname"}
+              name={"nickName"}
+              placeholder="nickname please..."
+            />
+          </form>
+        )}
+
         <button
           className={cx(buttonModal, neutralButton)}
           type="button"
@@ -81,6 +103,7 @@ export default function Modal({
         >
           {options.cancelButton}
         </button>
+
         {handleSubmit && (
           <button
             className={

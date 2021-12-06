@@ -72,17 +72,20 @@ export default function PokemonListPage() {
   }, [loading]);
 
   return (
-    <ul className={PokemonDetailStyle.ulClass}>
-      {pokemons.length > 0 &&
-        pokemons.map((pokemon, i) => (
-          <PokemonCard
-            key={i}
-            pokemon={pokemon}
-            myPokemonList={myPokemonList}
-            totalOwned={getTotalOwned(ownedList.current, pokemon.name)}
-          />
-        ))}
-      {loading && <p>Loading...</p>}
-    </ul>
+    <>
+      <h1>Welcome To Venupedia!</h1>
+      <ul className={PokemonDetailStyle.ulClass}>
+        {pokemons.length > 0 &&
+          pokemons.map((pokemon, i) => (
+            <PokemonCard
+              key={i}
+              pokemon={pokemon}
+              myPokemonList={myPokemonList}
+              totalOwned={getTotalOwned(ownedList.current, pokemon.name)}
+            />
+          ))}
+        {loading && <p>Loading...</p>}
+      </ul>
+    </>
   );
 }

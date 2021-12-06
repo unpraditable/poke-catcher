@@ -32,6 +32,8 @@ export default function MyPokemonListPage() {
   }
   return (
     <>
+      <h1>Welcome To Venupedia!</h1>
+
       <ul className={PokemonDetailStyle.ulClass}>
         {myPokemons.length > 0 &&
           myPokemons.map((pokemon, i) => (

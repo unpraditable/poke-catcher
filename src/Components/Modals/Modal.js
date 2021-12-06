@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import { cx } from "@emotion/css";
 import ModalStyle from "./ModalStyle";
 
 export default function Modal({

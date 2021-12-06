@@ -5,7 +5,6 @@ import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 import { useEffect, useState } from "react";
 import Modal from "../Components/Modals/Modal";
-import { useRef } from "react/cjs/react.development";
 import Toast from "../Components/Toasts/Toast";
 
 export default function MyPokemonListPage() {

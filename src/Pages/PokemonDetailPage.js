@@ -9,7 +9,6 @@ import TypeList from "../Components/TypeList";
 import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 import Modal from "../Components/Modals/Modal";
-import { css } from "@emotion/css";
 import Toast from "../Components/Toasts/Toast";
 import PokemonDetailStyle from "../StyleClasses/PokemonDetailStyle";
 

@@ -10,10 +10,12 @@ import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
 import Modal from "../Components/Modals/Modal";
 import { css } from "@emotion/css";
+import Toast from "../Components/Toasts/Toast";
 
 export default function PokemonDetailPage() {
   const [pokemon, setPokemon] = useState();
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isToastShown, setIsToastShown] = useState(false);
   const { name } = useParams();
   const inputModalRef = useRef();
   const chance = Math.random() >= 0.5;
@@ -40,6 +42,7 @@ export default function PokemonDetailPage() {
       nickName: inputNickname,
     });
     setIsModalShown(false);
+    setIsToastShown(true);
   }
 
   const nickNameModalOptions = {
@@ -88,8 +91,21 @@ export default function PokemonDetailPage() {
     }
   }, [loading, data]);
 
+  useEffect(() => {
+    if (isToastShown) {
+      setTimeout(() => {
+        setIsToastShown(false);
+      }, 5000);
+    }
+  }, [isToastShown]);
+
   return (
     <div>
+      <Toast
+        isToastShown={isToastShown}
+        message="Pokemon saved to My Pokemon List"
+      />
+
       {loading && <p>Loading...</p>}
       {pokemon && (
         <>

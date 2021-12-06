@@ -3,15 +3,17 @@ import "./PokemonList.css";
 import PokemonDetailStyle from "../StyleClasses/PokemonDetailStyle";
 import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Components/Modals/Modal";
 import { useRef } from "react/cjs/react.development";
+import Toast from "../Components/Toasts/Toast";
 
 export default function MyPokemonListPage() {
   const myPokemons = useStore(myPokemonSelector.getMyPokemon);
   const indexChosen = useRef();
   const releaseMyPokemon = useStore(myPokemonSelector.releaseMyPokemon);
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isToastShown, setIsToastShown] = useState(false);
   const message = useRef();
 
   const modalOptions = {
@@ -22,6 +24,7 @@ export default function MyPokemonListPage() {
 
   function releasePokemon(index) {
     setIsModalShown(false);
+    setIsToastShown(true);
     releaseMyPokemon(index);
   }
 
@@ -30,9 +33,21 @@ export default function MyPokemonListPage() {
     setIsModalShown(true);
     indexChosen.current = index;
   }
+
+  useEffect(() => {
+    if (isToastShown) {
+      setTimeout(() => {
+        setIsToastShown(false);
+      }, 5000);
+    }
+  }, [isToastShown]);
   return (
     <>
-      <h1>Welcome To Venupedia!</h1>
+      <Toast
+        isToastShown={isToastShown}
+        message="Pokemon has been released..."
+      />
+      <h1>My Pokemon Collection</h1>
 
       <ul className={PokemonDetailStyle.ulClass}>
         {myPokemons.length > 0 &&

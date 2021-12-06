@@ -59,10 +59,6 @@ export default function PokemonListPage() {
   }, []);
 
   useEffect(() => {
-    if (loading) console.log("loading");
-    if (error) console.log("error");
-
-    console.log("Response from server", data);
     if (data && !loading) {
       setPokemons((arr) => [...arr, ...data.pokemons.results]);
       if (pokemonsCount.current === 0) {

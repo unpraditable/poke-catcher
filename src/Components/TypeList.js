@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import { cx } from "@emotion/css";
 import GeneralStyle from "../StyleClasses/GeneralStyle";
 import PokemonDetailStyle from "../StyleClasses/PokemonDetailStyle";
 

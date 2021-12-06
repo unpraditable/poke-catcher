@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import { cx } from "@emotion/css";
 import ToastStyle from "./ToastStyle";
 
 export default function Toast({ message, isToastShown }) {

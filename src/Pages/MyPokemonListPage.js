@@ -14,10 +14,10 @@ export default function MyPokemonListPage() {
   const releaseMyPokemon = useStore(myPokemonSelector.releaseMyPokemon);
   const [isModalShown, setIsModalShown] = useState(false);
   const [isToastShown, setIsToastShown] = useState(false);
-  const message = useRef();
+  const [message, setMessage] = useState("");
 
   const modalOptions = {
-    message: message.current,
+    message,
     cancelButton: "No",
     submitButton: "Yes",
   };
@@ -29,7 +29,7 @@ export default function MyPokemonListPage() {
   }
 
   function openModal(index, nickname, name) {
-    message.current = `Are you sure you want to release ${nickname} (${name}) ?`;
+    setMessage(`Are you sure you want to release ${nickname} (${name}) ?`);
     setIsModalShown(true);
     setIndexChosen(index);
   }

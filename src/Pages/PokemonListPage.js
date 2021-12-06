@@ -46,7 +46,7 @@ export default function PokemonListPage() {
 
   useEffect(() => {
     ownedList.current.push(ArrUtils.groupBy(myPokemonList, "name"));
-  }, []);
+  }, [myPokemonList]);
 
   useEffect(() => {
     if (data && !loading) {
@@ -55,7 +55,7 @@ export default function PokemonListPage() {
         pokemonsCount.current = data.pokemons.count;
       }
     }
-  }, [loading]);
+  }, [loading, data]);
 
   return (
     <>

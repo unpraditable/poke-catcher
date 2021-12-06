@@ -35,7 +35,10 @@ export default function MoveList({ pokemon }) {
         )}
       >
         {pokemon.moves.map(({ move }, i) => (
-          <li className={cx(GeneralStyle.capitalize, GeneralStyle.commaList)}>
+          <li
+            key={i}
+            className={cx(GeneralStyle.capitalize, GeneralStyle.commaList)}
+          >
             {StringUtils.removeDash(move.name)}
             {i + 1 !== pokemon.moves.length ? "," : ""}
           </li>

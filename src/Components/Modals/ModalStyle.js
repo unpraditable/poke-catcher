@@ -65,12 +65,18 @@ export default class ModalStyle {
   `;
 
   static formStyle = css`
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     input {
       width: 200px;
       border-radius: 4px;
       border: 1px solid #212529;
       padding: 8px 6px;
     }
+  `;
+
+  static errorMessage = css`
+    color: #cc0000;
+    font-size: 11px;
+    margin: 4px 0;
   `;
 }

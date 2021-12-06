@@ -6,6 +6,7 @@ import "./PokemonList.css";
 import PokemonDetailStyle from "../StyleClasses/PokemonDetailStyle";
 import useStore from "../StateManager/UseStore";
 import { myPokemonSelector } from "../StateManager/MyPokemon/MyPokemonReducer";
+import ArrUtils from "../Utils/ArrUtils";
 
 export default function PokemonListPage() {
   const myPokemonList = useStore(myPokemonSelector.getMyPokemon);
@@ -17,7 +18,7 @@ export default function PokemonListPage() {
 
   const ownedList = useRef([]);
   const pokemonsCount = useRef(0);
-  const { loading, error, data } = useQuery(Pokemon.GET_POKEMONS, {
+  const { loading, data } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
   });
 
@@ -43,19 +44,8 @@ export default function PokemonListPage() {
     return arr[0][name] ? arr[0][name].length : 0;
   }
 
-  function groupBy(arr, criteria) {
-    const newObj = arr.reduce(function (acc, currentValue) {
-      if (!acc[currentValue[criteria]]) {
-        acc[currentValue[criteria]] = [];
-      }
-      acc[currentValue[criteria]].push(currentValue);
-      return acc;
-    }, {});
-    return newObj;
-  }
-
   useEffect(() => {
-    ownedList.current.push(groupBy(myPokemonList, "name"));
+    ownedList.current.push(ArrUtils.groupBy(myPokemonList, "name"));
   }, []);
 
   useEffect(() => {
@@ -76,7 +66,6 @@ export default function PokemonListPage() {
             <PokemonCard
               key={i}
               pokemon={pokemon}
-              myPokemonList={myPokemonList}
               totalOwned={getTotalOwned(ownedList.current, pokemon.name)}
             />
           ))}

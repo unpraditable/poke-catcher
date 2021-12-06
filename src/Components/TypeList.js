@@ -13,8 +13,11 @@ export default function TypeList({ pokemon }) {
           GeneralStyle.m8
         )}
       >
-        {pokemon.types.map(({ type }) => (
-          <li className={cx(GeneralStyle.capitalize, GeneralStyle.commaList)}>
+        {pokemon.types.map(({ type }, i) => (
+          <li
+            key={i}
+            className={cx(GeneralStyle.capitalize, GeneralStyle.commaList)}
+          >
             {type.name}
           </li>
         ))}

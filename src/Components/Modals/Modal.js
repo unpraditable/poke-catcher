@@ -9,6 +9,7 @@ export default function Modal({
   handleClose,
   danger,
   inputRef,
+  inputError,
 }) {
   return (
     <div
@@ -27,6 +28,9 @@ export default function Modal({
               name={"nickName"}
               placeholder="nickname please..."
             />
+            {inputError && (
+              <p className={ModalStyle.errorMessage}>{inputError}</p>
+            )}
           </form>
         )}
 

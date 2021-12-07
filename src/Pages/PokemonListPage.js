@@ -18,7 +18,7 @@ export default function PokemonListPage() {
 
   const ownedList = useRef([]);
   const pokemonsCount = useRef(0);
-  const { loading, data } = useQuery(Pokemon.GET_POKEMONS, {
+  const { loading, data, error } = useQuery(Pokemon.GET_POKEMONS, {
     variables: gqrVar,
   });
 
@@ -45,6 +45,7 @@ export default function PokemonListPage() {
   }
 
   useEffect(() => {
+    console.log(myPokemonList);
     ownedList.current.push(ArrUtils.groupBy(myPokemonList, "name"));
   }, [myPokemonList]);
 
@@ -74,6 +75,7 @@ export default function PokemonListPage() {
             />
           ))}
         {loading && <p>Loading...</p>}
+        {error && <p>Error! Please refresh the page</p>}
       </ul>
     </>
   );

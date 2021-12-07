@@ -1,7 +1,12 @@
 # poke-catcher
+
 A repo to show list of Pokemon and catch Pokemon
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## deployed app
+
+Please kindly visit https://jolly-hodgkin-f95784.netlify.app/
 
 ## Available Scripts
 

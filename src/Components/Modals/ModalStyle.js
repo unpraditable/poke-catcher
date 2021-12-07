@@ -54,6 +54,7 @@ export default class ModalStyle {
   static neutralButton = css`
     color: #212529;
     background-color: #dfe5f2;
+    label: neutral-button;
   `;
 
   static dangerButton = css`
@@ -62,6 +63,7 @@ export default class ModalStyle {
 
   static submitButton = css`
     background-color: #49896f;
+    label: submit-button;
   `;
 
   static formStyle = css`

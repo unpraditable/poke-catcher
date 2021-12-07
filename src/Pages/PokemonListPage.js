@@ -45,7 +45,6 @@ export default function PokemonListPage() {
   }
 
   useEffect(() => {
-    console.log(myPokemonList);
     ownedList.current.push(ArrUtils.groupBy(myPokemonList, "name"));
   }, [myPokemonList]);
 
